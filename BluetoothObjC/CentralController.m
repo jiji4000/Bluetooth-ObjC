@@ -48,17 +48,8 @@
 }
 - (void) scanNewDevice
 {
-    // Scanの開始. 重複したAdvertisingを受け取らないようにする.
-    //[_ccmCentralManager scanForPeripheralsWithServices:@CBUUID UUIDWithString:SERVICE_UUID
-      //                                         options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
-
-    // clash I don't know why
-//    [_ccmCentralManager scanForPeripheralsWithServices:[CBUUID UUIDWithNSUUID:SERVICE_UUID]
-//                                             options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
-
     [_ccmCentralManager scanForPeripheralsWithServices:[NSArray arrayWithObjects:[CBUUID UUIDWithString:SERVICE_UUID], nil]
                                              options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
- 
 }
 // Peripheralが見つかったら実行.
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
