@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -68,45 +68,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejL-La-r4V">
-                                <rect key="frame" x="166" y="535" width="38" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="peripheral message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lY7-4C-YXf">
+                                <rect key="frame" x="112" y="44" width="151" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="get" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lY7-4C-YXf">
-                                <rect key="frame" x="164" y="462" width="40" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="inputMessage!" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qba-AC-azm">
+                                <rect key="frame" x="129.5" y="617" width="116" height="30"/>
                                 <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2h-o0-hSE">
-                                <rect key="frame" x="164" y="617" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="touchSend:" destination="nnp-Hf-4Ue" eventType="touchDown" id="xpK-01-FY9"/>
+                                    <action selector="editEnd:" destination="nnp-Hf-4Ue" eventType="editingDidEnd" id="AHs-Ak-Xto"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjX-BU-gL5">
+                                <rect key="frame" x="164" y="557" width="47" height="30"/>
+                                <state key="normal" title="search"/>
+                                <connections>
+                                    <action selector="search:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="UVx-F4-dqd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIZ-j1-rBB">
+                                <rect key="frame" x="170.5" y="493" width="34" height="30"/>
+                                <state key="normal" title="send"/>
+                                <connections>
+                                    <action selector="search:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="sNz-nc-jQQ"/>
+                                    <action selector="touchSend:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="T6X-hb-PLz"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejL-La-r4V">
+                                <rect key="frame" x="168" y="109" width="39" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ejL-La-r4V" firstAttribute="top" secondItem="lY7-4C-YXf" secondAttribute="bottom" constant="52" id="APO-dq-61s"/>
-                            <constraint firstItem="Ro8-Se-ZAJ" firstAttribute="top" secondItem="r2h-o0-hSE" secondAttribute="bottom" constant="20" id="EHP-fk-DY1"/>
-                            <constraint firstItem="lY7-4C-YXf" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="Kv0-9V-RHE"/>
-                            <constraint firstItem="r2h-o0-hSE" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="OFE-Q3-nSy"/>
-                            <constraint firstItem="ejL-La-r4V" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="aiA-6L-3Ay"/>
-                            <constraint firstItem="r2h-o0-hSE" firstAttribute="top" secondItem="ejL-La-r4V" secondAttribute="bottom" constant="61" id="o2K-xc-vni"/>
+                            <constraint firstItem="ejL-La-r4V" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="1PN-um-VfM"/>
+                            <constraint firstItem="rjX-BU-gL5" firstAttribute="top" secondItem="eIZ-j1-rBB" secondAttribute="bottom" constant="34" id="6zt-da-jfM"/>
+                            <constraint firstItem="rjX-BU-gL5" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="8JC-VU-Cl1"/>
+                            <constraint firstItem="ejL-La-r4V" firstAttribute="top" secondItem="lY7-4C-YXf" secondAttribute="bottom" constant="12" id="BEd-0v-Fib"/>
+                            <constraint firstItem="lY7-4C-YXf" firstAttribute="top" secondItem="tXD-XT-mQk" secondAttribute="bottom" constant="12" id="bEh-VA-Lat"/>
+                            <constraint firstItem="qba-AC-azm" firstAttribute="top" secondItem="rjX-BU-gL5" secondAttribute="bottom" constant="30" id="fVp-2M-nb2"/>
+                            <constraint firstItem="lY7-4C-YXf" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="hVj-aF-3gN"/>
+                            <constraint firstItem="qba-AC-azm" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="sGS-vF-SUi"/>
+                            <constraint firstItem="Ro8-Se-ZAJ" firstAttribute="top" secondItem="qba-AC-azm" secondAttribute="bottom" constant="20" id="sgv-g5-TpD"/>
+                            <constraint firstItem="eIZ-j1-rBB" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="yhf-St-Icc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="getLabel" destination="lY7-4C-YXf" id="ldg-1G-NbC"/>
-                        <outlet property="sendButton" destination="r2h-o0-hSE" id="3zF-Rp-nV9"/>
-                        <outlet property="sendLabel" destination="ejL-La-r4V" id="ooN-ts-s4h"/>
+                        <outlet property="inputField" destination="qba-AC-azm" id="MeE-CP-Ghd"/>
+                        <outlet property="periperalMessageLabel" destination="lY7-4C-YXf" id="4Ml-lz-Gzp"/>
+                        <outlet property="searchButton" destination="rjX-BU-gL5" id="QAU-Ko-wbA"/>
+                        <outlet property="sendButton" destination="eIZ-j1-rBB" id="ZGg-xJ-zIn"/>
+                        <outlet property="stateLabel" destination="ejL-La-r4V" id="hrK-Zf-vLh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTP-ET-XNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="36" y="790"/>
+            <point key="canvasLocation" x="116" y="1023.2383808095952"/>
         </scene>
         <!--Peripheral View Controller-->
         <scene sceneID="fom-Ri-mTr">

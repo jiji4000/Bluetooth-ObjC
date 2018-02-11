@@ -2,13 +2,9 @@
 #import "CentralController.h"
 
 @interface CentralViewController ()
-//@property (weak, nonatomic) IBOutlet UITextField    *txtGotValue;
-//@property (weak, nonatomic) IBOutlet UITextField    *txtSendValue;
-//@property (weak, nonatomic) IBOutlet UIButton       *btnSend;
 @property (strong, nonatomic) CentralController     *ctrCentral;
 @property (strong, nonatomic) NSTimer               *tmrUpdateText;
 @property (nonatomic) int                           intSendValue;
-//- (IBAction)btnSendTouched:(id)sender;
 
 @end
 
@@ -37,7 +33,7 @@
 - (void)updateText:(NSTimer *)timer
 {
     // Centralから取得した値をTextFieldに入れる.
-    _getLabel.text = [_ctrCentral getPeripheralValue];
+    //_periperalMessageLabel.text = [_ctrCentral getPeripheralValue];
     
     // 書き込みリクエストの結果.
     if([_ctrCentral getIsValueWrote])
@@ -62,7 +58,12 @@
 - (IBAction)touchSend:(id)sender {
     // ボタン押下で乱数をPeripheralに送信する.
     _intSendValue = (int)arc4random_uniform(999);
-    _sendLabel.text = [NSString stringWithFormat:@"%d", _intSendValue];
+    //_sendLabel.text = [NSString stringWithFormat:@"%d", _intSendValue];
     [_ctrCentral sendValue:_intSendValue];
+}
+
+- (IBAction)search:(id)sender {
+}
+- (IBAction)editEnd:(id)sender {
 }
 @end
