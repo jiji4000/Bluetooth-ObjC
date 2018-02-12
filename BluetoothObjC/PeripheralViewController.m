@@ -2,10 +2,6 @@
 #import "PeripheralController.h"
 
 @interface PeripheralViewController ()
-//@property (weak) IBOutlet NSWindow *window;
-//@property (weak) IBOutlet NSTextField               *txtGotValue;
-//@property (weak) IBOutlet NSTextField               *txtSendValue;
-//@property (weak) IBOutlet NSButton                  *btnStop;
 @property (strong, nonatomic) PeripheralController  *ctrPeripheral;
 @property (strong, nonatomic) NSTimer               *tmrUpdateText;
 @property (strong, nonatomic) NSTimer               *tmrSendValue;
@@ -17,6 +13,10 @@
 {
     [super viewDidLoad];
     
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     _ctrPeripheral = [[PeripheralController alloc] init];
     // Bluetoothの使用準備. PeripheralManagerの初期化.
     [_ctrPeripheral initPeripheralController];
@@ -25,7 +25,6 @@
     [self startUpdateTextTimer];
     [self startSendValueTimer];
 }
-
 
 - (void)startUpdateTextTimer
 {
@@ -75,4 +74,35 @@
     [self stopSendValueTimer];
     [_ctrPeripheral close];
 }
+
+#pragma UITableView
+
+/**
+    section number
+*/
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+// cell size
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [[_ctrPeripheral getCentralDevices]count];
+}
+
+/**
+    instanciate tableview cell
+*/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // tableCell の ID で UITableViewCell のインスタンスを生成
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centralCell"];
+    if(cell==nil){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"centralCell"];
+    }
+    // 
+    UILabel *label1 = (UILabel *)[cell viewWithTag:1];
+    label1.text = [NSString stringWithFormat:@"No.%d",(int)(indexPath.row+1)];
+    
+    return cell;
+}
+
 @end

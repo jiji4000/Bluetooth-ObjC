@@ -10,6 +10,7 @@
 @property (strong, nonatomic) CBMutableCharacteristic   *cmcCharacteristic;
 @property (strong, nonatomic) NSMutableData             *mdtSendValue;
 @property (strong, nonatomic) NSString                  *strGotValue;
+@property (strong, nonatomic) NSMutableArray            *centralDevices;
 @property (nonatomic) BOOL                              isSubscribed;
 @end
 @implementation PeripheralController
@@ -17,7 +18,6 @@
 {
     // PeripheralManagerの初期化. Delegateにselfを設定し、起動時にBluetoothがOffならアラートを表示する.
     _cpmPeripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey:@YES}];
-    
     _isSubscribed = NO;
     _strGotValue = @"";
 }
@@ -31,6 +31,7 @@
     // Centralの書き込みリクエストで受け取った値を返す.
     return _strGotValue;
 }
+
 // Bluetoothの状態が変わったら実行される.
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
 {
@@ -92,4 +93,9 @@
         }
     }
 }
+
+-(NSMutableArray*) getCentralDevices{
+    return _centralDevices;
+}
+
 @end

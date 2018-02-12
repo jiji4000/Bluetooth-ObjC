@@ -7,6 +7,7 @@
 - (void) initPeripheralController;
 - (void) close;
 - (NSString *) getCentralValue;
+- (NSMutableArray *) getCentralDevices;
 - (BOOL) updatePeripheralValue:(int) intSendData;
 @end
 
