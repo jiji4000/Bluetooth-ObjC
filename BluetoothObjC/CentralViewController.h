@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface CentralViewController : UIViewController
+@interface CentralViewController : UIViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *periperalMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *stateLabel;
@@ -10,6 +10,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
 - (IBAction)editEnd:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 

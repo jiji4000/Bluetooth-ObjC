@@ -74,54 +74,68 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="inputMessage!" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qba-AC-azm">
-                                <rect key="frame" x="129.5" y="617" width="116" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="editEnd:" destination="nnp-Hf-4Ue" eventType="editingDidEnd" id="AHs-Ak-Xto"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjX-BU-gL5">
-                                <rect key="frame" x="164" y="557" width="47" height="30"/>
-                                <state key="normal" title="search"/>
-                                <connections>
-                                    <action selector="search:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="UVx-F4-dqd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIZ-j1-rBB">
-                                <rect key="frame" x="170.5" y="493" width="34" height="30"/>
-                                <state key="normal" title="send"/>
-                                <connections>
-                                    <action selector="search:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="sNz-nc-jQQ"/>
-                                    <action selector="touchSend:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="T6X-hb-PLz"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejL-La-r4V">
                                 <rect key="frame" x="168" y="109" width="39" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12u-fD-mYv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="inputMessage!" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qba-AC-azm">
+                                        <rect key="frame" x="129" y="629" width="116" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="editEnd:" destination="nnp-Hf-4Ue" eventType="editingDidEnd" id="AHs-Ak-Xto"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIZ-j1-rBB">
+                                        <rect key="frame" x="170" y="545" width="34" height="30"/>
+                                        <state key="normal" title="send"/>
+                                        <connections>
+                                            <action selector="search:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="sNz-nc-jQQ"/>
+                                            <action selector="touchSend:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="T6X-hb-PLz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjX-BU-gL5">
+                                        <rect key="frame" x="164" y="583" width="47" height="30"/>
+                                        <state key="normal" title="search"/>
+                                        <connections>
+                                            <action selector="search:" destination="nnp-Hf-4Ue" eventType="touchUpInside" id="UVx-F4-dqd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qba-AC-azm" secondAttribute="bottom" constant="8" id="1e6-nV-Zfn"/>
+                                    <constraint firstItem="qba-AC-azm" firstAttribute="top" secondItem="rjX-BU-gL5" secondAttribute="bottom" constant="16" id="3xZ-Av-Hdj"/>
+                                    <constraint firstItem="eIZ-j1-rBB" firstAttribute="top" secondItem="12u-fD-mYv" secondAttribute="top" constant="545" id="QUO-Ig-2Uc"/>
+                                    <constraint firstItem="qba-AC-azm" firstAttribute="centerX" secondItem="12u-fD-mYv" secondAttribute="centerX" id="Qp9-ZL-Xsl"/>
+                                    <constraint firstAttribute="trailing" secondItem="qba-AC-azm" secondAttribute="trailing" constant="130" id="jDR-hP-l7v"/>
+                                    <constraint firstItem="eIZ-j1-rBB" firstAttribute="centerX" secondItem="12u-fD-mYv" secondAttribute="centerX" id="tHx-50-xsF"/>
+                                    <constraint firstAttribute="width" constant="375" id="tck-pl-gTJ"/>
+                                    <constraint firstItem="rjX-BU-gL5" firstAttribute="top" secondItem="eIZ-j1-rBB" secondAttribute="bottom" constant="8" id="vs5-CZ-Xdt"/>
+                                    <constraint firstItem="rjX-BU-gL5" firstAttribute="centerX" secondItem="12u-fD-mYv" secondAttribute="centerX" id="w43-s8-NQp"/>
+                                    <constraint firstAttribute="height" constant="667" id="wbK-cr-6aT"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ejL-La-r4V" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="1PN-um-VfM"/>
-                            <constraint firstItem="rjX-BU-gL5" firstAttribute="top" secondItem="eIZ-j1-rBB" secondAttribute="bottom" constant="34" id="6zt-da-jfM"/>
-                            <constraint firstItem="rjX-BU-gL5" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="8JC-VU-Cl1"/>
                             <constraint firstItem="ejL-La-r4V" firstAttribute="top" secondItem="lY7-4C-YXf" secondAttribute="bottom" constant="12" id="BEd-0v-Fib"/>
+                            <constraint firstItem="12u-fD-mYv" firstAttribute="centerX" secondItem="lY7-4C-YXf" secondAttribute="centerX" id="FVO-Bn-jRt"/>
                             <constraint firstItem="lY7-4C-YXf" firstAttribute="top" secondItem="tXD-XT-mQk" secondAttribute="bottom" constant="12" id="bEh-VA-Lat"/>
-                            <constraint firstItem="qba-AC-azm" firstAttribute="top" secondItem="rjX-BU-gL5" secondAttribute="bottom" constant="30" id="fVp-2M-nb2"/>
                             <constraint firstItem="lY7-4C-YXf" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="hVj-aF-3gN"/>
-                            <constraint firstItem="qba-AC-azm" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="sGS-vF-SUi"/>
-                            <constraint firstItem="Ro8-Se-ZAJ" firstAttribute="top" secondItem="qba-AC-azm" secondAttribute="bottom" constant="20" id="sgv-g5-TpD"/>
-                            <constraint firstItem="eIZ-j1-rBB" firstAttribute="centerX" secondItem="6W2-VL-AU7" secondAttribute="centerX" id="yhf-St-Icc"/>
+                            <constraint firstItem="12u-fD-mYv" firstAttribute="bottom" secondItem="Ro8-Se-ZAJ" secondAttribute="top" id="m9O-V7-2s9"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="inputField" destination="qba-AC-azm" id="MeE-CP-Ghd"/>
                         <outlet property="periperalMessageLabel" destination="lY7-4C-YXf" id="4Ml-lz-Gzp"/>
+                        <outlet property="scrollView" destination="12u-fD-mYv" id="8jY-Sb-HhH"/>
                         <outlet property="searchButton" destination="rjX-BU-gL5" id="QAU-Ko-wbA"/>
                         <outlet property="sendButton" destination="eIZ-j1-rBB" id="ZGg-xJ-zIn"/>
                         <outlet property="stateLabel" destination="ejL-La-r4V" id="hrK-Zf-vLh"/>
