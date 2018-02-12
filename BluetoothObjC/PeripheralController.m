@@ -1,9 +1,8 @@
-//#import < IOBluetooth / IOBluetooth.h >
 #import "PeripheralController.h"
 @import CoreBluetooth;
 
-#define CHARACTERISTIC_UUID @"7F855F82-9378-4508-A3D2-CD989104AF22"
-#define SERVICE_UUID @"2B1DA6DE-9C29-4D6C-A930-B990EA2F12BB"
+#define CHARACTERISTIC_UUID @"c54e5502-0c99-11e8-ba89-0ed5f89f718b"
+#define SERVICE_UUID @"bdb57744-0c99-11e8-ba89-0ed5f89f718b"
 
 @interface PeripheralController() < CBPeripheralManagerDelegate >
 @property (strong, nonatomic) CBPeripheralManager       *cpmPeripheralManager;
@@ -21,6 +20,7 @@
     _isSubscribed = NO;
     _strGotValue = @"";
 }
+
 - (void) close
 {
     // Advertisingをストップ.
@@ -57,11 +57,9 @@
     [_cpmPeripheralManager addService:cmsService];
     
     // Advertisingの開始.Centralから探索可能にする.
-    //[_cpmPeripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @CBUUID UUIDWithString:SERVICE_UUID }];
     [_cpmPeripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : [CBUUID UUIDWithString:SERVICE_UUID] }];
-   //[_cpmPeripheralManager startAdvertising:[CBAdvertisementDataServiceUUIDsKey : [CBUUID UUIDWithString:SERVICE_UUID ]]];
-    
 }
+
 // Peripheralで設定した値を更新したら、Centralに通知がいくようにする(Centralからのリクエストで実行).
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
 {
