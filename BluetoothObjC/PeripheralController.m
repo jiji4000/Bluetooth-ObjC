@@ -58,8 +58,8 @@
     // PeripheralManagerにServiceを追加する.
     [_cpmPeripheralManager addService:cmsService];
     
-    // Advertisingの開始.Centralから探索可能にする.
-    [_cpmPeripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : [CBUUID UUIDWithString:SERVICE_UUID] }];
+        // Advertisingの開始.Centralから探索可能にする.
+    [_cpmPeripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:SERVICE_UUID]] }];
     
     // set state text
     [_viewController setStateLabelText:@"Advertising started"];
