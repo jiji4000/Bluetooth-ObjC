@@ -70,6 +70,7 @@
 {
     _isSubscribed = YES;
 }
+
 - (BOOL) updatePeripheralValue:(int) intSendData
 {
     if(_isSubscribed)
@@ -83,6 +84,25 @@
     }
     return NO;
 }
+
+/**
+ Invoked when you publish a service,
+ and any of its associated characteristics and characteristic descriptors,
+ to the local Generic Attribute Profile (GATT) database.
+ */
+- (void)peripheralManager:(CBPeripheralManager *)peripheral
+            didAddService:(CBService *)service
+                    error:(NSError *)error{
+    NSLog(@"call didAddService");
+    if(error == nil){
+        // set state text
+        [_viewController setStateLabelText:@"add Service"];
+
+    }else{
+        
+    }
+}
+
 // Centralから書き込みリクエストを受けたら実行.
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests
 {
