@@ -62,6 +62,7 @@
     _intSendValue = (int)arc4random_uniform(999);
     [_ctrPeripheral updatePeripheralValue:_intSendValue];
 }
+
 - (void)stopSendValueTimer
 {
     if(_tmrSendValue)

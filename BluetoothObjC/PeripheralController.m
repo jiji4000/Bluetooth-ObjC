@@ -65,9 +65,14 @@
     [_viewController setStateLabelText:@"Advertising started"];
 }
 
-// Peripheralで設定した値を更新したら、Centralに通知がいくようにする(Centralからのリクエストで実行).
+/**
+ Peripheralで設定した値を更新したら、Centralに通知がいくようにする(Centralからのリクエストで実行).
+ Invoked when a remote central device subscribes to a characteristic’s value.
+ */
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic
 {
+    NSLog(@"call didSubscribeToCharacteristic");
+    [_centralDevices addObject:central];
     _isSubscribed = YES;
 }
 
