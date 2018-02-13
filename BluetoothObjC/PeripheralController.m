@@ -11,10 +11,12 @@
 @property (strong, nonatomic) NSString                  *strGotValue;
 @property (strong, nonatomic) NSMutableArray            *centralDevices;
 @property (nonatomic) BOOL                              isSubscribed;
+@property (strong,nonatomic)  PeripheralViewController  *viewController;
 @end
 @implementation PeripheralController
-- (void) initPeripheralController
+- (void) initPeripheralController:(id)viewController
 {
+    self.viewController = viewController;
     // PeripheralManagerの初期化. Delegateにselfを設定し、起動時にBluetoothがOffならアラートを表示する.
     _cpmPeripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:@{CBPeripheralManagerOptionShowPowerAlertKey:@YES}];
     _isSubscribed = NO;
@@ -58,6 +60,9 @@
     
     // Advertisingの開始.Centralから探索可能にする.
     [_cpmPeripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : [CBUUID UUIDWithString:SERVICE_UUID] }];
+    
+    // set state text
+    [_viewController setStateLabelText:@"Advertising started"];
 }
 
 // Peripheralで設定した値を更新したら、Centralに通知がいくようにする(Centralからのリクエストで実行).

@@ -16,14 +16,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     _ctrPeripheral = [[PeripheralController alloc] init];
-    // Bluetoothの使用準備. PeripheralManagerの初期化.
-    [_ctrPeripheral initPeripheralController];
-    
-    // タイマーの起動.
-    [self startUpdateTextTimer];
-    [self startSendValueTimer];
 }
 
 - (void)startUpdateTextTimer
@@ -31,11 +24,22 @@
     // 0.05秒ごとにCentralから取得した値を更新.
     _tmrUpdateText = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(updateText:) userInfo:nil repeats:YES];
 }
+
+- (void)prepareBluetooth{
+    [_ctrPeripheral initPeripheralController:self];
+    // タイマーの起動.
+    [self startUpdateTextTimer];
+    [self startSendValueTimer];
+}
+
+-(void)setStateLabelText:(NSString*)text{
+    [_stateLabel setText:text];
+}
+
 - (void)updateText:(NSTimer *)timer
 {
     // Centralから取得した値をTextFieldに入れる.
     //.stringValue = [_ctrPeripheral getCentralValue];
-    [_timeLabel setText:[_ctrPeripheral getCentralValue]];
 }
 
 - (void)stopUpdateLabelTimer
@@ -57,8 +61,6 @@
     // 999までの乱数をCentralに送信する.
     _intSendValue = (int)arc4random_uniform(999);
     [_ctrPeripheral updatePeripheralValue:_intSendValue];
-    
-    [_sendVlewLabel setText:[NSString stringWithFormat:@"%d", _intSendValue]];
 }
 - (void)stopSendValueTimer
 {
@@ -105,4 +107,7 @@
     return cell;
 }
 
+- (IBAction)touchAdvertiseBtn:(id)sender {
+    [self prepareBluetooth];
+}
 @end
