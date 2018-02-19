@@ -1,12 +1,12 @@
 #import "CentralController.h"
 @import CoreBluetooth;
 
-#define CHARACTERISTIC_UUID @"7F855F82-9378-4508-A3D2-CD989104AF22"
-#define SERVICE_UUID @"2B1DA6DE-9C29-4D6C-A930-B990EA2F12BB"
+#define CHARACTERISTIC_UUID @"c54e5502-0c99-11e8-ba89-0ed5f89f718b"
+#define SERVICE_UUID @"bdb57744-0c99-11e8-ba89-0ed5f89f718b"
 
 @interface CentralController()
 @property (strong, nonatomic) CBCentralManager      *ccmCentralManager;
-@property (strong, nonatomic) CBPeripheral          *prpDiscovered;
+@property (strong, nonatomic) CBPeripheral          *peripheral;
 @property (strong, nonatomic) CBCharacteristic      *chrDiscoveredChacteristic;
 @property (strong, nonatomic) NSMutableData         *mdtSendValue;
 @property (strong, nonatomic) NSString              *strGotValue;
@@ -25,7 +25,7 @@
 {
     // Peripheralへの書き込みリクエスト.
     _mdtSendValue = (NSMutableData *)[[NSString stringWithFormat:@"%d", intSendValue] dataUsingEncoding:NSUTF8StringEncoding];
-    [_prpDiscovered writeValue:_mdtSendValue forCharacteristic:_chrDiscoveredChacteristic type:CBCharacteristicWriteWithResponse];
+    [self.peripheral writeValue:_mdtSendValue forCharacteristic:_chrDiscoveredChacteristic type:CBCharacteristicWriteWithResponse];
 }
 - (NSString *) getPeripheralValue
 {
@@ -37,6 +37,7 @@
     // 書き込みに成功したかを返す.
     return _isValueWrote;
 }
+
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
     // BluetoothがOffならリターン.
@@ -44,24 +45,30 @@
     {
         return;
     }
-    [self scanNewDevice];
 }
+
 - (void) scanNewDevice
 {
+    NSLog(@"call scanNewDevice");
     [_ccmCentralManager scanForPeripheralsWithServices:[NSArray arrayWithObjects:[CBUUID UUIDWithString:SERVICE_UUID], nil]
-                                             options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
+                                               options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
 }
-// Peripheralが見つかったら実行.
+
+/**
+ peripheralが見つかったら実行される
+ */
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    NSLog(@"call didDiscoverPeriperal");
     // 未接続のPeripheralのみ追加.
-    if (_prpDiscovered != peripheral)
+    if (self.peripheral != peripheral)
     {
-        _prpDiscovered = peripheral;
+        self.peripheral = peripheral;
         // Peripheralに接続する.
         [_ccmCentralManager connectPeripheral:peripheral options:nil];
     }
 }
+
 // Peripheralに接続されたら実行.
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
@@ -71,9 +78,9 @@
     peripheral.delegate = self;
     
     // Serviceを探索する.
-    //[peripheral discoverServices:@CBUUID UUIDWithString:SERVICE_UUID];
-    [peripheral discoverServices:[CBUUID UUIDWithString:SERVICE_UUID]];
+    [peripheral discoverServices:@[[CBUUID UUIDWithString:SERVICE_UUID]]];
 }
+
 // 接続したPeripheralでServiceが見つかったら実行.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
@@ -87,11 +94,13 @@
     // Characteristicの探索.
     for (CBService *service in peripheral.services)
     {
-        //[peripheral discoverCharacteristics:@CBUUID UUIDWithString:CHARACTERISTIC_UUID forService:service];
-        [peripheral discoverCharacteristics:[CBUUID UUIDWithString:CHARACTERISTIC_UUID] forService:service];
+        [peripheral discoverCharacteristics:@[[CBUUID UUIDWithString:CHARACTERISTIC_UUID]] forService:service];
     }
 }
-// 見つかったServiceからCharacteristicが見つかったら実行.
+
+/**
+ 見つかったServiceからCharacteristicが見つかったら実行.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     if (error)
@@ -111,6 +120,7 @@
         }
     }
 }
+
 // 書き込みリクエストを送信して、返答があれば実行.
 - (void)peripheral:(CBPeripheral*)peripheral didWriteValueForCharacteristic:(CBCharacteristic*)characteristic error:(NSError*)error
 {
@@ -124,6 +134,7 @@
         _isValueWrote = YES;
     }
 }
+
 // Peripheralからデータ更新の通知が届いたら実行.
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
@@ -133,11 +144,12 @@
     }
     _strGotValue = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
 }
+
 // Peripheralとの接続が切れたら実行.
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     // 接続したPeripheralを破棄してScanの再実行.
-    _prpDiscovered = nil;
+    self.peripheral = nil;
     [self scanNewDevice];
 }
 @end

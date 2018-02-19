@@ -53,18 +53,8 @@
 
 - (void)updateText:(NSTimer *)timer
 {
-    // Centralから取得した値をTextFieldに入れる.
-    //_periperalMessageLabel.text = [_ctrCentral getPeripheralValue];
-    
-    // 書き込みリクエストの結果.
-    if([_ctrCentral getIsValueWrote])
-    {
-        NSLog(@"YES");
-    }
-    else
-    {
-        NSLog(@"NO");
-    }
+    // Pereralから取得した値
+    _periperalMessageLabel.text = [_ctrCentral getPeripheralValue];
 }
 
 - (void)stopUpdateLabelTimer
@@ -98,7 +88,9 @@
 }
 
 - (IBAction)search:(id)sender {
+    [_ctrCentral scanNewDevice];
 }
+
 
 - (IBAction)editEnd:(id)sender {
 }

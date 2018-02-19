@@ -15,6 +15,7 @@
 -(void) sendValue:(int)intSendValue;
 -(NSString *) getPeripheralValue;
 -(BOOL) getIsValueWrote;
+-(void) scanNewDevice;
 @end
 
 #endif /* CentralController_h */
