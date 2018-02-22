@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 @interface CentralController : NSObject
 -(void) initCentralController;
--(void) sendValue:(int)intSendValue;
+-(void) sendValue:(NSString *)sendValue;
 -(NSString *) getPeripheralValue;
 -(BOOL) getIsValueWrote;
 -(void) scanNewDevice;

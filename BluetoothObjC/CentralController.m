@@ -21,12 +21,14 @@
     _strGotValue = @"";
     _isValueWrote = NO;
 }
-- (void)sendValue:(int)intSendValue
+
+- (void)sendValue:(NSString*)sendValue
 {
     // Peripheralへの書き込みリクエスト.
-    _mdtSendValue = (NSMutableData *)[[NSString stringWithFormat:@"%d", intSendValue] dataUsingEncoding:NSUTF8StringEncoding];
+    _mdtSendValue = (NSMutableData *)[sendValue dataUsingEncoding:NSUTF8StringEncoding];
     [self.peripheral writeValue:_mdtSendValue forCharacteristic:_chrDiscoveredChacteristic type:CBCharacteristicWriteWithResponse];
 }
+
 - (NSString *) getPeripheralValue
 {
     // Peripheralから受け取った値を返す.

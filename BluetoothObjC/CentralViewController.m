@@ -4,7 +4,7 @@
 @interface CentralViewController ()
 @property (strong, nonatomic) CentralController     *ctrCentral;
 @property (strong, nonatomic) NSTimer               *tmrUpdateText;
-@property (nonatomic) int                           intSendValue;
+@property (nonatomic) NSString                      *sendValue;
 
 @end
 
@@ -18,6 +18,7 @@
     [_ctrCentral initCentralController];
     
     _inputField.delegate = self;
+    [_inputField setPlaceholder:@"input message"];
     
     // タイマーの起動.
     [self startUpdateTextTimer];
@@ -81,10 +82,8 @@
 }
 
 - (IBAction)touchSend:(id)sender {
-    // ボタン押下で乱数をPeripheralに送信する.
-    _intSendValue = (int)arc4random_uniform(999);
-    //_sendLabel.text = [NSString stringWithFormat:@"%d", _intSendValue];
-    [_ctrCentral sendValue:_intSendValue];
+    _sendValue = [_inputField text];
+    [_ctrCentral sendValue:_sendValue];
 }
 
 - (IBAction)search:(id)sender {
