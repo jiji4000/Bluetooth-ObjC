@@ -58,10 +58,12 @@
 
 /**
  peripheralが見つかったら実行される
- */
+*/
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     NSLog(@"call didDiscoverPeriperal");
+    // peripheralを発見したらscanを止める
+    [_ccmCentralManager stopScan];
     // 未接続のPeripheralのみ追加.
     if (self.peripheral != peripheral)
     {
@@ -74,9 +76,6 @@
 // Peripheralに接続されたら実行.
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-    // 接続されたらScanをストップ.
-    [_ccmCentralManager stopScan];
-    
     peripheral.delegate = self;
     
     // Serviceを探索する.
