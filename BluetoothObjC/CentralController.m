@@ -72,12 +72,12 @@
         [_ccmCentralManager connectPeripheral:peripheral options:nil];
     }
 }
-
-// Peripheralに接続されたら実行.
+/**
+ Peripheralに接続されたら実行される
+*/
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     peripheral.delegate = self;
-    
     // Serviceを探索する.
     [peripheral discoverServices:@[[CBUUID UUIDWithString:SERVICE_UUID]]];
 }
