@@ -72,6 +72,7 @@
         [_ccmCentralManager connectPeripheral:peripheral options:nil];
     }
 }
+
 /**
  Peripheralに接続されたら実行される
 */
@@ -136,7 +137,9 @@
     }
 }
 
-// Peripheralからデータ更新の通知が届いたら実行.
+/**
+ Peripheralからデータ更新の通知が届いたら実行される
+*/
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (error) {
